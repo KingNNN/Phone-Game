@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Stacker.unity
+- path: Assets/Scenes/TempScene.unity
   isLoaded: 1
   isActive: 1
