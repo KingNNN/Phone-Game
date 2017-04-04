@@ -64,7 +64,7 @@ public class Player : MonoBehaviour {
                   jumpVal,                  //Distance from ground to peak and vice versa
                   cameraYPos,               //
                   slideTime = 0.0f,         //Actual sliding time
-                  slideTimeMax = 0.5f,      //Max slide time (Distance)
+                  slideTimeMax = 0.375f,      //Max slide time (Distance)
                   chargeTime = 0.0f,        //Actual charge time
                   chargeTimeMax = 0.35f,    //Max charge time (Distance)
                   randomSpawnVal = 0,       //Timer to spawn obs
@@ -245,6 +245,8 @@ public class Player : MonoBehaviour {
         {
             slideTime = 0.0f;
             isSliding = false;
+            myCollider.center = new Vector3(myCollider.center.x, colCY, myCollider.center.z);
+            myCollider.size = new Vector3(myCollider.size.x, colSY, myCollider.size.z);
         }
 
         if (!isCharging)
@@ -523,11 +525,15 @@ public class Player : MonoBehaviour {
         {
             if (!isSliding && STATE_GROUNDED)
             {
-                isSliding = true;
-                myCollider.center = new Vector3(myCollider.center.x, colCYSlide, myCollider.center.z);
-                myCollider.size = new Vector3(myCollider.size.x, colSYSlide, myCollider.size.z);
-                //myControl.Play("Slide", -1, 0.0f);
-                myControl.SetTrigger("Slide");
+                if (myControl.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+                {
+                    isSliding = true;
+                    myCollider.center = new Vector3(myCollider.center.x, colCYSlide, myCollider.center.z);
+                    myCollider.size = new Vector3(myCollider.size.x, colSYSlide, myCollider.size.z);
+
+                    myControl.SetTrigger("Slide");
+                    //myControl.Play("Slide", -1, 0.0f);                    
+                }
             }
         }       
 

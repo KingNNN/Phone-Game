@@ -7,6 +7,9 @@ public class StackerLevel : MonoBehaviour {
     public GameObject stackBlock;       //Block that is created up top
     public GameObject currentBlock;     //Block for motion check
 
+    public GameObject[] gameStack; 
+    public int stackIter = 0;
+
     public Transform startBlock;        //Block at bottom (don't touch)
     public Vector3 spwnPoint,           //Place to spawn blocks
         motionCheck1,                   //Check pos 1
@@ -16,11 +19,15 @@ public class StackerLevel : MonoBehaviour {
     float checkDelta = 0,               //
         checkTime = 0.75f;               //How often to check for motion
 
-    public float dist = 7;              //Height from highest block to drop
+    public float dist = 7,              //Height from highest block to drop
+                 camZPos;
 
 	// Use this for initialization
-	void Start () {        
+	void Start () {
+        
+        gameStack = new GameObject[1];
 
+        camZPos = -10;
         SpawnBlock();
         motionCheck1 = Vector3.zero;
         motionCheck2 = Vector3.zero;
@@ -48,6 +55,18 @@ public class StackerLevel : MonoBehaviour {
                     motionCheck1 = Vector3.zero;
                     motionCheck2 = Vector3.zero;
                     checkDelta = 0;
+
+                    if (stackIter > 0)
+                    {
+                        for (int i = 0; i < stackIter; i++)
+                        {
+                            //Not the correct way to stabalize, but its all I have for now,
+                            //after a while, blocks start floating...
+                            //fix later
+                            gameStack[i].GetComponent<Rigidbody>().useGravity = false;
+                        }
+                    }
+
                     SpawnBlock();
                 }
                 else
@@ -64,7 +83,7 @@ public class StackerLevel : MonoBehaviour {
     void SpawnBlock()
     {
         startChecking = false;
-        StackerBlock[] collection = FindObjectsOfType<StackerBlock>();
+        StackerBlock[] collection = FindObjectsOfType<StackerBlock>();        
 
         int highest = 0;
 
@@ -80,9 +99,11 @@ public class StackerLevel : MonoBehaviour {
             spwnPoint = new Vector3(0, collection[highest].transform.position.y + dist, 0);
 
         Instantiate(stackBlock, spwnPoint, Quaternion.Euler(0,0,0));
+        System.Array.Resize(ref gameStack, (stackIter + 1));
 
-        //Implement some sort of smoothness, probably from running level
-        Camera.main.transform.position = new Vector3(spwnPoint.x, spwnPoint.y - 3,-10);
+        //Implement some sort of smoothness, probably from running level        
+        Camera.main.transform.position = new Vector3(spwnPoint.x, spwnPoint.y - 3,camZPos);
+        camZPos -= 0.5f;
         startChecking = true;
     }
 	

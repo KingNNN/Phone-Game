@@ -23,12 +23,27 @@ public class Enemy_Spawn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        int randomNum = Random.Range(1, 10);
+
+        if (randomNum % 2 == 0)
+            flag = spawnType.obsHI;
+        else
+            flag = spawnType.obsLO;
+
         player = GameObject.FindWithTag("Player");
 
         speedFactor = 10.0f;
 
-        startPos = GameObject.Find("ObsStart").transform.position;
-        endPos = GameObject.Find("ObsEnd").transform.position;
+        if (flag == spawnType.obsHI)
+        {
+            startPos = GameObject.Find("ObsStart").transform.position;
+            endPos = GameObject.Find("ObsEnd").transform.position;
+        }
+        else
+        {
+            startPos = GameObject.Find("Obs Lo Start").transform.position;
+            endPos = GameObject.Find("Obs Lo End").transform.position;
+        }
 
         transform.position = startPos;
 

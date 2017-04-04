@@ -8,11 +8,17 @@ public class MainMenu : MonoBehaviour {
 
     public Button playButton,
         customButton,
-        optionsButton;
+        optionsButton,
+        runGame,
+        stackGame,
+        targetGame;
 
     Animator playAnim,
         customAnim,
-        optionsAnim;
+        optionsAnim,
+        runnerAnim,
+        stackAnim,
+        targetAnim;
 
     //Animation anim;
 
@@ -23,6 +29,10 @@ public class MainMenu : MonoBehaviour {
         playAnim = playButton.GetComponent<Animator>();
         customAnim = customButton.GetComponent<Animator>();
         optionsAnim = optionsButton.GetComponent<Animator>();
+
+        runnerAnim = runGame.GetComponent<Animator>();
+        stackAnim = stackGame.GetComponent<Animator>();
+        targetAnim = targetGame.GetComponent<Animator>();
     }
 
     public void ButtonPresses(string button)
@@ -38,6 +48,24 @@ public class MainMenu : MonoBehaviour {
             case "custom":
                 {
                     StartCoroutine("Domino", "down");
+                }
+                break;
+
+            case "run":
+                {
+                    SceneManager.LoadScene("TempScene");
+                }
+                break;
+
+            case "stack":
+                {
+                    SceneManager.LoadScene("Stacker");
+                }
+                break;
+
+            case "target":
+                {
+                    SceneManager.LoadScene("Target Practice");
                 }
                 break;
 
@@ -68,8 +96,13 @@ public class MainMenu : MonoBehaviour {
             customAnim.Play("Button Slide");
             yield return new WaitForSeconds(0.25f);
             playAnim.Play("Button Slide");
-            yield return new WaitForSeconds(0.75f);
-            SceneManager.LoadScene("TempScene");
+            yield return new WaitForSeconds(0.25f);
+            //SceneManager.LoadScene("TempScene");
+            runnerAnim.Play("Button Slide In");
+            yield return new WaitForSeconds(0.25f);
+            stackAnim.Play("Button Slide In");
+            yield return new WaitForSeconds(0.25f);
+            targetAnim.Play("Button Slide In");
         }
         else
         {

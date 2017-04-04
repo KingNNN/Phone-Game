@@ -33,6 +33,8 @@ public class TargetLevel : MonoBehaviour {
         tempObj.transform.position = new Vector3(Random.Range(-xConstraint, xConstraint),
                                           Random.Range(-4, yConstraint),0);
 
+        tempObj.transform.LookAt(Camera.main.transform);
+
         //Instantiate(tempObj, tempVec, Quaternion.Euler(Vector3.zero));
     }
 

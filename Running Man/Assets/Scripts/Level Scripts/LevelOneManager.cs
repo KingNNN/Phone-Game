@@ -10,11 +10,13 @@ public class LevelOneManager : MonoBehaviour {
     Play with it a little
     */
 
-    public Transform startPos;
+    public Transform startPosHi, startPosLo;
     public GameObject obstacle;
 
     public float timePassed = 0, 
                  timeToWait = 2.0f;
+
+    int randomNum;
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,10 +25,19 @@ public class LevelOneManager : MonoBehaviour {
 
         if (timePassed >= timeToWait)
         {
-            Instantiate(obstacle, startPos);
+            randomNum = Random.Range(1,10);
+
+            if(randomNum % 2 == 0)
+                Instantiate(obstacle, startPosHi);
+            else
+                Instantiate(obstacle, startPosLo);
+
             timePassed = 0;
 
-            timeToWait = Random.Range(1.0f,3.0f);
+            if (timeToWait > 0.5f)
+                timeToWait -= timeToWait * 0.1f;// Random.Range(0.5f,2.0f);
+            else
+                timeToWait = 0.5f;
         }
 
 	}

@@ -16,8 +16,11 @@ public class StackerBlock : MonoBehaviour {
 
     bool sentData = false;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject[] gameStack;
+    public int stackIter = 0;
+
+    // Use this for initialization
+    void Start () {
 
         minX = -5;
         maxX = 5;
@@ -25,8 +28,12 @@ public class StackerBlock : MonoBehaviour {
         myRigidbody = GetComponent<Rigidbody>();
 
         myRigidbody.useGravity = false;
-		
-	}
+
+        gameStack = GameObject.Find("Level Manager").GetComponent<StackerLevel>().gameStack;
+        stackIter = GameObject.Find("Level Manager").GetComponent<StackerLevel>().stackIter;
+
+
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -38,6 +45,9 @@ public class StackerBlock : MonoBehaviour {
                 gameObject.transform.position;
 
             GameObject.Find("Level Manager").GetComponent<StackerLevel>().currentBlock = gameObject;
+
+            gameStack[stackIter] = gameObject;
+            GameObject.Find("Level Manager").GetComponent<StackerLevel>().stackIter = ++stackIter;
             sentData = true;
         }
     }
