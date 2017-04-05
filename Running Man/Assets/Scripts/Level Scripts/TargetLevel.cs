@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class TargetLevel : MonoBehaviour {
@@ -13,6 +14,10 @@ public class TargetLevel : MonoBehaviour {
     public GameObject normalTarget;
     float xConstraint = 6.75f, yConstraint = 6;
     float timePassed, timeToWait;
+
+    public Text myScoreText;
+
+    public int localPlayerScore = 0;
     
 
     void Start()
@@ -24,6 +29,13 @@ public class TargetLevel : MonoBehaviour {
         {
             newTarget();
         }
+    }
+
+    public void addToScore(int amt)
+    {
+        localPlayerScore += amt;
+        myScoreText.color = Color.blue;
+        myScoreText.text = "Score: " + localPlayerScore;
     }
 
     void newTarget()
@@ -45,7 +57,10 @@ public class TargetLevel : MonoBehaviour {
         if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0))
         {
             if (hit.transform.name == "Cube" || hit.transform.name == "Cube(Clone)")
+            {
                 Destroy(hit.transform.gameObject);
+                addToScore(5);
+            }
         }
     }
 

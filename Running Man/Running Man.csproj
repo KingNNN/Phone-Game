@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Enemy_Spawn.cs" />
     <Compile Include="Assets\Scripts\Level Scripts\LevelOneManager.cs" />
     <Compile Include="Assets\Scripts\Level Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Level Scripts\MenuObjects.cs" />
     <Compile Include="Assets\Scripts\Level Scripts\StackerBase.cs" />
     <Compile Include="Assets\Scripts\Level Scripts\StackerBlock.cs" />
     <Compile Include="Assets\Scripts\Level Scripts\StackerLevel.cs" />

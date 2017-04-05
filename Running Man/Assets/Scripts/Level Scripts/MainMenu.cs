@@ -4,53 +4,33 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour {
-
-    public Button playButton,
-        customButton,
-        optionsButton,
-        runGame,
-        stackGame,
-        targetGame;
-
-    Animator playAnim,
-        customAnim,
-        optionsAnim,
-        runnerAnim,
-        stackAnim,
-        targetAnim;
-
-    //Animation anim;
+public class MainMenu : MenuObjects {
 
 	// Use this for initialization
 	void Start () {
-        //anim = GetComponent<Animation>();
-
-        playAnim = playButton.GetComponent<Animator>();
-        customAnim = customButton.GetComponent<Animator>();
-        optionsAnim = optionsButton.GetComponent<Animator>();
-
-        runnerAnim = runGame.GetComponent<Animator>();
-        stackAnim = stackGame.GetComponent<Animator>();
-        targetAnim = targetGame.GetComponent<Animator>();
+        InitMenu();
     }
 
+    //Main Menu Navigation
     public void ButtonPresses(string button)
     {
         switch (button)
         {
+                /*********************MAIN MENU*******************/
             case "play":
                 {
-                    StartCoroutine("Domino", "up");                        
+                    StartCoroutine(MAIN_Domino("up", "modes"));                        
                 }
                 break;
 
             case "custom":
                 {
-                    StartCoroutine("Domino", "down");
+                    StartCoroutine(MAIN_Domino("down",null));
                 }
                 break;
+                /*************************************************/
 
+                /*******************GAME MODES*******************/
             case "run":
                 {
                     SceneManager.LoadScene("TempScene");
@@ -69,6 +49,12 @@ public class MainMenu : MonoBehaviour {
                 }
                 break;
 
+            case "tanks":
+                {
+                    //SceneManager.LoadScene("Target Practice");
+                }
+                break;
+            /************************************************/
             default:
                 break;
         }
@@ -76,41 +62,66 @@ public class MainMenu : MonoBehaviour {
 #if (UNITY_EDITOR)
         if (Input.GetKeyDown("w"))
         {
-            StartCoroutine("Domino", "up");
+            StartCoroutine(MAIN_Domino("up", null));
         }
 
         if (Input.GetKeyDown("s"))
         {
-            StartCoroutine("Domino", "down");
+            StartCoroutine(MAIN_Domino("up", null));
         }
 #endif
     }
 
-    IEnumerator Domino(string dir)
+    IEnumerator MAIN_Domino(string dir, string next)
     {
-        if (dir == "up")
+        //Main Menu
+        switch (dir)
         {
             //Play Button is Pressed
-            optionsAnim.Play("Button Slide");
-            yield return new WaitForSeconds(0.25f);
-            customAnim.Play("Button Slide");
-            yield return new WaitForSeconds(0.25f);
-            playAnim.Play("Button Slide");
-            yield return new WaitForSeconds(0.25f);
-            //SceneManager.LoadScene("TempScene");
-            runnerAnim.Play("Button Slide In");
-            yield return new WaitForSeconds(0.25f);
-            stackAnim.Play("Button Slide In");
-            yield return new WaitForSeconds(0.25f);
-            targetAnim.Play("Button Slide In");
+            case "up":
+                {                    
+                    //Main Menu leaves
+                    optionsAnim.Play("Button Slide");
+                    yield return new WaitForSeconds(0.25f);
+                    customAnim.Play("Button Slide");
+                    yield return new WaitForSeconds(0.25f);
+                    playAnim.Play("Button Slide");
+                    yield return new WaitForSeconds(0.25f);
+                }
+                break;
+
+            case "down":
+                {
+                    optionsAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    customAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    playAnim.Play("Button Slide In");
+                }
+                break;
+
+            default:
+                break;
         }
-        else
+
+        //Play Was Pressed
+        switch (dir)
         {
-            optionsAnim.Play("Button Slide In");
-            yield return new WaitForSeconds(0.25f);
-            customAnim.Play("Button Slide In");
-            yield return new WaitForSeconds(0.25f);
-            playAnim.Play("Button Slide In");
+            case "modes":
+                {
+                    //Game Modes Appear
+                    runnerAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    stackAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    targetAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    tankAnim.Play("Button Slide In");
+                }
+                break;
+
+            default:
+                break;
         }
     }
 

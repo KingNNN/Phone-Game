@@ -56,16 +56,16 @@ public class StackerLevel : MonoBehaviour {
                     motionCheck2 = Vector3.zero;
                     checkDelta = 0;
 
-                    if (stackIter > 0)
-                    {
-                        for (int i = 0; i < stackIter; i++)
-                        {
-                            //Not the correct way to stabalize, but its all I have for now,
-                            //after a while, blocks start floating...
-                            //fix later
-                            gameStack[i].GetComponent<Rigidbody>().useGravity = false;
-                        }
-                    }
+                    //if (stackIter > 0)
+                    //{
+                    //    for (int i = 0; i < stackIter; i++)
+                    //    {
+                    //        //Not the correct way to stabalize, but its all I have for now,
+                    //        //after a while, blocks start floating...
+                    //        //fix later
+                    //        gameStack[i].GetComponent<Rigidbody>().useGravity = false;
+                    //    }
+                    //}
 
                     SpawnBlock();
                 }
@@ -114,6 +114,33 @@ public class StackerLevel : MonoBehaviour {
             SpawnBlock();
 
         if (startChecking)
+        {
             motionCheck();
+
+            if (stackIter > 0)
+            {
+                for (int i = 0; i < stackIter; i++)
+                {
+                    //Not the correct way to stabalize, but its all I have for now,
+                    //after a while, blocks start floating...
+                    //fix later
+                    gameStack[i].GetComponent<Rigidbody>().useGravity = true;
+                }
+            }
+
+        }
+        else
+        {
+            if (stackIter > 0)
+            {
+                for (int i = 0; i < stackIter; i++)
+                {
+                    //Not the correct way to stabalize, but its all I have for now,
+                    //after a while, blocks start floating...
+                    //fix later
+                    gameStack[i].GetComponent<Rigidbody>().useGravity = false;
+                }
+            }
+        }
     }
 }
