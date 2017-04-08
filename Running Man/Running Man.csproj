@@ -95,7 +95,9 @@
     <Compile Include="Assets\Scripts\Player Scripts\Default_Player.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Light_Player.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Tank Scripts\Tank.cs" />
     <Compile Include="Assets\Scripts\Timed_Destroy.cs" />
+    <Compile Include="Assets\Scripts\Wind Lvl Scripts\WindPlayer.cs" />
     <Compile Include="Assets\Scripts\checkPoint.cs" />
     <Compile Include="Assets\Scripts\testScript.cs" />
     <Compile Include="Assets\Temp Stuff\Billboard.cs" />

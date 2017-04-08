@@ -105,7 +105,7 @@ public class MainMenu : MenuObjects {
         }
 
         //Play Was Pressed
-        switch (dir)
+        switch (next)
         {
             case "modes":
                 {
