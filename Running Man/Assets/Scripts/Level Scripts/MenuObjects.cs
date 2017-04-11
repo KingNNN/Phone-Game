@@ -19,12 +19,14 @@ public class MenuObjects : MonoBehaviour {
     public Button runGame,
         stackGame,
         targetGame,
-        tankGame;    
+        tankGame,
+        fanGame;    
 
     public Animator runnerAnim,
         stackAnim,
         targetAnim,
-        tankAnim;
+        tankAnim,
+        fanAnim;
     /***************************/
 
     public void InitMenu()
@@ -39,5 +41,6 @@ public class MenuObjects : MonoBehaviour {
         stackAnim = stackGame.GetComponent<Animator>();
         targetAnim = targetGame.GetComponent<Animator>();
         tankAnim = tankGame.GetComponent<Animator>();
+        fanAnim = fanGame.GetComponent<Animator>();
     }
 }

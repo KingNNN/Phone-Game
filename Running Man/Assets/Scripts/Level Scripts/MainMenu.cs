@@ -37,6 +37,12 @@ public class MainMenu : MenuObjects {
                 }
                 break;
 
+            case "fan":
+                {
+                    SceneManager.LoadScene("Wind Level");
+                }
+                break;
+
             case "stack":
                 {
                     SceneManager.LoadScene("Stacker");
@@ -117,6 +123,8 @@ public class MainMenu : MenuObjects {
                     targetAnim.Play("Button Slide In");
                     yield return new WaitForSeconds(0.25f);
                     tankAnim.Play("Button Slide In");
+                    yield return new WaitForSeconds(0.25f);
+                    fanAnim.Play("Button Slide In");
                 }
                 break;
 
