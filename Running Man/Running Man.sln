@@ -1,7 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running Man", "Running Man.csproj", "{00038589-9828-901F-33F2-9E22D62FA491}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{DEF090C3-8B5E-0A77-AC0E-5D35AEE720E1}") = "Running Man", "Assembly-CSharp.csproj", "{461EC330-7484-511C-B1C6-081E30C66546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00038589-9828-901F-33F2-9E22D62FA491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00038589-9828-901F-33F2-9E22D62FA491}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00038589-9828-901F-33F2-9E22D62FA491}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00038589-9828-901F-33F2-9E22D62FA491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461EC330-7484-511C-B1C6-081E30C66546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461EC330-7484-511C-B1C6-081E30C66546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461EC330-7484-511C-B1C6-081E30C66546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461EC330-7484-511C-B1C6-081E30C66546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
