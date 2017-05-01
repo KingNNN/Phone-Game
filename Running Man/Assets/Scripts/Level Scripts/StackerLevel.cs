@@ -22,16 +22,18 @@ public class StackerLevel : MonoBehaviour {
     public float dist = 7,              //Height from highest block to drop
                  camZPos;
 
+    public int blockNumber = 1;
+
 	// Use this for initialization
 	void Start () {
         
         gameStack = new GameObject[1];
+        stackBlock.GetComponent<StackerBlock>().resetSpeed();
 
         camZPos = -10;
         SpawnBlock();
         motionCheck1 = Vector3.zero;
         motionCheck2 = Vector3.zero;
-
     }
 
     void motionCheck()
@@ -82,6 +84,8 @@ public class StackerLevel : MonoBehaviour {
 
     void SpawnBlock()
     {
+        Debug.Log("Current Player: " + blockNumber);
+
         startChecking = false;
         StackerBlock[] collection = FindObjectsOfType<StackerBlock>();        
 
@@ -94,25 +98,44 @@ public class StackerLevel : MonoBehaviour {
         }
 
         if(collection.Length == 0)
-            spwnPoint = new Vector3(0, startBlock.position.y + dist, 0);
+            spwnPoint = new Vector3(0, startBlock.position.y + (dist + 2), 0);
         else
             spwnPoint = new Vector3(0, collection[highest].transform.position.y + dist, 0);
+        
+        /*******************************************************/
+        //Change color of each block in the StackerBlock script//        
+        /*******************************************************/
 
         Instantiate(stackBlock, spwnPoint, Quaternion.Euler(0,0,0));
-        System.Array.Resize(ref gameStack, (stackIter + 1));
+        System.Array.Resize(ref gameStack, (stackIter +1));
+        stackBlock.GetComponent<StackerBlock>().addSpeed();  
 
         //Implement some sort of smoothness, probably from running level        
         Camera.main.transform.position = new Vector3(spwnPoint.x, spwnPoint.y - 3,camZPos);
-        camZPos -= 0.5f;
+        //camZPos -= 0.5f;
         startChecking = true;
+
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        //Changes color of blocks
+        if (blockNumber >= 5)
+            blockNumber = 1;
+
+        //Debug spawner
         if (Input.GetKeyDown("g"))
             SpawnBlock();
 
+        /*******************************************************/
+        /*NEED TO FIGURE OUT A WAY TO RESTRICT THE SWAY MOTIONS*/
+        /*******************************************************/
+
+        /*                           !!!                       */
+        /*MIGHT IMPLEMENT A COUNTDOWN UNTIL NEXT PLAYER TO HELP*/
+        /*******************************************************/
         if (startChecking)
         {
             motionCheck();
@@ -125,6 +148,7 @@ public class StackerLevel : MonoBehaviour {
                     //after a while, blocks start floating...
                     //fix later
                     gameStack[i].GetComponent<Rigidbody>().useGravity = true;
+                    gameStack[i].GetComponent<Rigidbody>().isKinematic = false;
                 }
             }
 
@@ -139,6 +163,7 @@ public class StackerLevel : MonoBehaviour {
                     //after a while, blocks start floating...
                     //fix later
                     gameStack[i].GetComponent<Rigidbody>().useGravity = false;
+                    gameStack[i].GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
         }

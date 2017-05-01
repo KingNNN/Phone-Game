@@ -111,7 +111,7 @@ public class WindPlayer : MonoBehaviour {
     void Update () {
 
         AddVelocity();
-        BalanceVelocity();
+        //BalanceVelocity();
 
         if (transform.position.x < xConstraint)
         {
