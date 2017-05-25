@@ -11,25 +11,28 @@ public class WindObsSpawn : MonoBehaviour {
 
     void spawnObs()
     {
-        obstacles.Add(GameObject.CreatePrimitive(PrimitiveType.Sphere));
+        obstacles.Add(GameObject.CreatePrimitive(PrimitiveType.Capsule));
         obstacles[listIndex].transform.position = gameObject.transform.position;
+
+        //Random rotation for obstacles
+        //Could use some work
+        float newZRot = Random.Range(-45.0f, 45.0f);
+
+        if (gameObject.transform.position.y >= 2.25f)
+            newZRot = Random.Range(-45.0f, 30.0f);
+
+        if (gameObject.transform.position.y <= -2.25f)
+            newZRot = Random.Range(-30.0f, 45.0f);
+
+        obstacles[listIndex].transform.rotation = new Quaternion(0, 0, newZRot, 1);
         listIndex++;
 
         timePassed = 0;
         waitTime = Random.Range(1, 3);
 
         float newYPos = Random.Range(-4.5f, 4.5f);
-        //Commented out random rotation code, moght put it back in later
-        //float newZRot = Random.Range(-45.0f, 45.0f);
-
-        //if (newYPos >= 2.25f)
-        //    newZRot = Random.Range(-45.0f, 30.0f);
-
-        //if (newYPos <= -2.25f)
-        //    newZRot = Random.Range(-30.0f, 45.0f);
 
         gameObject.transform.position = new Vector3(transform.position.x, newYPos);
-        //gameObject.transform.rotation = new Quaternion(0, 0, newZRot,1);
     }
 
     void CheckObsPos()
@@ -57,7 +60,8 @@ public class WindObsSpawn : MonoBehaviour {
         {
             for (int i = 0; i < obstacles.Count; i++)
             {
-                obstacles[i].transform.position += Vector3.left * 0.1f;
+                //Makes objects in "obstacles" container move in the direction they're facing
+                obstacles[i].transform.position += obstacles[i].transform.right * 0.1f;
             }            
         }
 

@@ -28,9 +28,15 @@ public class MainMenu : MenuObjects {
                     StartCoroutine(MAIN_Domino("down",null));
                 }
                 break;
-                /*************************************************/
 
-                /*******************GAME MODES*******************/
+            case "netTest":
+                {
+                    SceneManager.LoadScene("Network Testing");
+                }
+                break;
+            /*************************************************/
+
+            /*******************GAME MODES*******************/
             case "run":
                 {
                     SceneManager.LoadScene("TempScene");
